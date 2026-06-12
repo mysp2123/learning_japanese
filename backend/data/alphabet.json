@@ -1,0 +1,227 @@
+{
+  "rows": [
+    {
+      "label": "A-row",
+      "hiragana": ["あ", "い", "う", "え", "お"],
+      "katakana": ["ア", "イ", "ウ", "エ", "オ"],
+      "romaji": ["a", "i", "u", "e", "o"]
+    },
+    {
+      "label": "K-row",
+      "hiragana": ["か", "き", "く", "け", "こ"],
+      "katakana": ["カ", "キ", "ク", "ケ", "コ"],
+      "romaji": ["ka", "ki", "ku", "ke", "ko"]
+    },
+    {
+      "label": "S-row",
+      "hiragana": ["さ", "し", "す", "せ", "そ"],
+      "katakana": ["サ", "シ", "ス", "セ", "ソ"],
+      "romaji": ["sa", "shi", "su", "se", "so"]
+    },
+    {
+      "label": "T-row",
+      "hiragana": ["た", "ち", "つ", "て", "と"],
+      "katakana": ["タ", "チ", "ツ", "テ", "ト"],
+      "romaji": ["ta", "chi", "tsu", "te", "to"]
+    },
+    {
+      "label": "N-row",
+      "hiragana": ["な", "に", "ぬ", "ne", "の"],
+      "katakana": ["ナ", "ニ", "ヌ", "ネ", "ノ"],
+      "romaji": ["na", "ni", "nu", "ne", "no"]
+    },
+    {
+      "label": "H-row",
+      "hiragana": ["は", "ひ", "ふ", "へ", "ほ"],
+      "katakana": ["ハ", "ヒ", "フ", "ヘ", "ホ"],
+      "romaji": ["ha", "hi", "fu", "he", "ho"]
+    },
+    {
+      "label": "M-row",
+      "hiragana": ["ま", "み", "む", "め", "mo"],
+      "katakana": ["マ", "ミ", "ム", "メ", "モ"],
+      "romaji": ["ma", "mi", "mu", "me", "mo"]
+    },
+    {
+      "label": "Y-row",
+      "hiragana": ["や", "", "ゆ", "", "よ"],
+      "katakana": ["ヤ", "", "ユ", "", "ヨ"],
+      "romaji": ["ya", "", "yu", "", "yo"]
+    },
+    {
+      "label": "R-row",
+      "hiragana": ["ら", "り", "る", "れ", "ろ"],
+      "katakana": ["ラ", "リ", "ル", "レ", "ロ"],
+      "romaji": ["ra", "ri", "ru", "re", "ro"]
+    },
+    {
+      "label": "W-row",
+      "hiragana": ["わ", "", "", "", "を"],
+      "katakana": ["ワ", "", "", "", "ヲ"],
+      "romaji": ["wa", "", "", "", "wo"]
+    },
+    {
+      "label": "N-row",
+      "hiragana": ["ん", "", "", "", ""],
+      "katakana": ["ン", "", "", "", ""],
+      "romaji": ["n", "", "", "", ""]
+    }
+  ],
+  "stroke_guides": {
+    "あ": {
+      "descriptions": [
+        "Nét 1: Vẽ nét ngang ngắn từ trái sang phải ở phần trên",
+        "Nét 2: Kéo nét dọc thẳng đứng hơi cong nhẹ từ trên xuống cắt qua nét 1",
+        "Nét 3: Đặt bút từ giữa nét dọc, lượn vòng xiên xuống trái rồi xoắn ngược lên lượn tròn sang phải"
+      ],
+      "indicators": [
+        {"x": 120, "y": 140, "label": "①"},
+        {"x": 200, "y": 80, "label": "②"},
+        {"x": 160, "y": 200, "label": "③"}
+      ],
+      "paths": [
+        [{"x": 120, "y": 140}, {"x": 280, "y": 140}],
+        [{"x": 200, "y": 80}, {"x": 200, "y": 320}],
+        [{"x": 210, "y": 180}, {"x": 140, "y": 240}, {"x": 170, "y": 310}, {"x": 280, "y": 240}, {"x": 230, "y": 160}, {"x": 160, "y": 200}]
+      ]
+    },
+    "い": {
+      "descriptions": [
+        "Nét 1: Kéo đường dọc hơi cong nhẹ từ trên xuống bên trái và móc ngược nhẹ ở cuối nét",
+        "Nét 2: Vẽ nét xiên ngắn hơi cong ở bên phải"
+      ],
+      "indicators": [
+        {"x": 110, "y": 120, "label": "①"},
+        {"x": 280, "y": 140, "label": "②"}
+      ],
+      "paths": [
+        [{"x": 130, "y": 120}, {"x": 110, "y": 260}, {"x": 130, "y": 240}],
+        [{"x": 270, "y": 140}, {"x": 280, "y": 220}]
+      ]
+    },
+    "う": {
+      "descriptions": [
+        "Nét 1: Vẽ một dấu phẩy ngắn chéo nhẹ ở phía trên",
+        "Nét 2: Bắt đầu từ dưới nét 1, lượn một nét cong tròn lớn vòng xuống phía dưới bên phải"
+      ],
+      "indicators": [
+        {"x": 170, "y": 80, "label": "①"},
+        {"x": 130, "y": 170, "label": "②"}
+      ],
+      "paths": [
+        [{"x": 160, "y": 80}, {"x": 240, "y": 100}],
+        [{"x": 140, "y": 160}, {"x": 260, "y": 180}, {"x": 240, "y": 280}, {"x": 150, "y": 320}]
+      ]
+    },
+    "え": {
+      "descriptions": [
+        "Nét 1: Vẽ dấu phẩy ngắn chéo góc ở phía trên cùng",
+        "Nét 2: Vẽ nét liên tục: từ trái qua phải, chéo xiên dài xuống góc dưới bên trái, lượn ngược lên rồi lượn sóng ngang qua phải"
+      ],
+      "indicators": [
+        {"x": 180, "y": 70, "label": "①"},
+        {"x": 120, "y": 150, "label": "②"}
+      ],
+      "paths": [
+        [{"x": 170, "y": 80}, {"x": 230, "y": 100}],
+        [{"x": 120, "y": 160}, {"x": 280, "y": 160}, {"x": 130, "y": 300}, {"x": 200, "y": 300}, {"x": 280, "y": 280}]
+      ]
+    },
+    "お": {
+      "descriptions": [
+        "Nét 1: Vẽ nét ngang ngắn từ trái sang phải",
+        "Nét 2: Vẽ nét dọc từ trên cắt qua nét 1, khuyên tròn xoắn ở dưới rồi lượn cong tròn ôm sang phải",
+        "Nét 3: Dấu phẩy chéo nhỏ ở phía trên bên phải"
+      ],
+      "indicators": [
+        {"x": 110, "y": 130, "label": "①"},
+        {"x": 200, "y": 80, "label": "②"},
+        {"x": 290, "y": 110, "label": "③"}
+      ],
+      "paths": [
+        [{"x": 120, "y": 140}, {"x": 260, "y": 140}],
+        [{"x": 200, "y": 90}, {"x": 200, "y": 220}, {"x": 160, "y": 260}, {"x": 190, "y": 310}, {"x": 280, "y": 240}, {"x": 240, "y": 180}],
+        [{"x": 270, "y": 110}, {"x": 290, "y": 130}]
+      ]
+    },
+    "ア": {
+      "descriptions": [
+        "Nét 1: Vẽ nét ngang từ trái sang phải, rồi bẻ góc kéo chéo dài xuống dưới bên trái",
+        "Nét 2: Vẽ nét dọc hơi cong xuống từ giữa nét ngang"
+      ],
+      "indicators": [
+        {"x": 120, "y": 120, "label": "①"},
+        {"x": 190, "y": 160, "label": "②"}
+      ],
+      "paths": [
+        [{"x": 120, "y": 120}, {"x": 280, "y": 120}, {"x": 160, "y": 240}],
+        [{"x": 200, "y": 170}, {"x": 160, "y": 300}]
+      ]
+    },
+    "イ": {
+      "descriptions": [
+        "Nét 1: Vẽ nét xiên dài từ trên xuống dưới bên trái",
+        "Nét 2: Vẽ nét dọc thẳng đứng đi xuống từ giữa nét 1"
+      ],
+      "indicators": [
+        {"x": 230, "y": 100, "label": "①"},
+        {"x": 180, "y": 160, "label": "②"}
+      ],
+      "paths": [
+        [{"x": 260, "y": 100}, {"x": 140, "y": 220}],
+        [{"x": 200, "y": 160}, {"x": 200, "y": 320}]
+      ]
+    },
+    "ウ": {
+      "descriptions": [
+        "Nét 1: Vẽ nét dọc ngắn thẳng đứng ở giữa trên cùng",
+        "Nét 2: Vẽ nét dọc ngắn chéo ở bên trái",
+        "Nét 3: Bắt đầu từ nét 2 đi ngang qua phải rồi bẻ góc kéo nét cong xiên xuống bên trái"
+      ],
+      "indicators": [
+        {"x": 200, "y": 60, "label": "①"},
+        {"x": 120, "y": 120, "label": "②"},
+        {"x": 150, "y": 120, "label": "③"}
+      ],
+      "paths": [
+        [{"x": 200, "y": 60}, {"x": 200, "y": 110}],
+        [{"x": 120, "y": 150}, {"x": 120, "y": 200}],
+        [{"x": 130, "y": 150}, {"x": 280, "y": 150}, {"x": 200, "y": 310}]
+      ]
+    },
+    "エ": {
+      "descriptions": [
+        "Nét 1: Vẽ nét ngang ngắn trên cùng từ trái qua phải",
+        "Nét 2: Vẽ nét dọc thẳng đi xuống xuất phát từ giữa nét 1",
+        "Nét 3: Vẽ nét ngang dài hơn ở dưới cùng làm chân đế"
+      ],
+      "indicators": [
+        {"x": 140, "y": 90, "label": "①"},
+        {"x": 200, "y": 110, "label": "②"},
+        {"x": 110, "y": 300, "label": "③"}
+      ],
+      "paths": [
+        [{"x": 140, "y": 90}, {"x": 260, "y": 90}],
+        [{"x": 200, "y": 100}, {"x": 200, "y": 290}],
+        [{"x": 100, "y": 300}, {"x": 300, "y": 300}]
+      ]
+    },
+    "オ": {
+      "descriptions": [
+        "Nét 1: Vẽ nét ngang ngắn từ trái sang phải",
+        "Nét 2: Vẽ nét dọc thẳng cắt qua nét 1, ở cuối nét bẻ móc chéo lên bên trái",
+        "Nét 3: Vẽ nét phẩy xiên xiết mạnh xuống từ góc giao nhau về phía dưới bên phải"
+      ],
+      "indicators": [
+        {"x": 110, "y": 150, "label": "①"},
+        {"x": 210, "y": 80, "label": "②"},
+        {"x": 160, "y": 200, "label": "③"}
+      ],
+      "paths": [
+        [{"x": 110, "y": 150}, {"x": 290, "y": 150}],
+        [{"x": 200, "y": 70}, {"x": 200, "y": 300}, {"x": 160, "y": 270}],
+        [{"x": 200, "y": 150}, {"x": 290, "y": 240}]
+      ]
+    }
+  }
+}

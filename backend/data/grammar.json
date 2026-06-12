@@ -1,0 +1,192 @@
+[
+  {
+    "id": "g1",
+    "title": "〜は〜です",
+    "level": "N5",
+    "structure": "Danh từ 1 は Danh từ 2 です",
+    "explanation": "Dùng để biểu thị Danh từ 1 là Danh từ 2. Trợ từ 'は' được đọc là 'wa'. 'です' đứng cuối câu biểu thị sự lịch sự và khẳng định.",
+    "examples": [
+      {
+        "sentence": "私は学生です。",
+        "reading": "わたしは がくせいです。",
+        "meaning": "Tôi là học sinh."
+      },
+      {
+        "sentence": "彼はベトナム人です。",
+        "reading": "かれは べとなむじんです。",
+        "meaning": "Anh ấy là người Việt Nam."
+      }
+    ]
+  },
+  {
+    "id": "g2",
+    "title": "〜てください",
+    "level": "N5",
+    "structure": "Động từ thể て + ください",
+    "explanation": "Dùng để yêu cầu hoặc đề nghị ai đó làm gì một cách lịch sự.",
+    "examples": [
+      {
+        "sentence": "ここに名前を書いてください。",
+        "reading": "ここに なまえを かいてください。",
+        "meaning": "Vui lòng viết tên của bạn vào đây."
+      },
+      {
+        "sentence": "日本語で話してください。",
+        "reading": "にほんごで はなしてください。",
+        "meaning": "Hãy nói bằng tiếng Nhật."
+      }
+    ]
+  },
+  {
+    "id": "g3",
+    "title": "〜があります / います",
+    "level": "N5",
+    "structure": "Danh từ + が + あります / います",
+    "explanation": "Dùng để chỉ sự tồn tại của đồ vật hoặc con người/động vật. 'あります' dùng cho vật vô tri, cây cối. 'います' dùng cho người và động vật.",
+    "examples": [
+      {
+        "sentence": "部屋に机があります。",
+        "reading": "へやに つくえが あります。",
+        "meaning": "Trong phòng có chiếc bàn."
+      },
+      {
+        "sentence": "庭に犬がいます。",
+        "reading": "にわに いぬが います。",
+        "meaning": "Trong vườn có một con chó."
+      }
+    ]
+  },
+  {
+    "id": "g4",
+    "title": "〜たいです",
+    "level": "N5",
+    "structure": "Động từ thể ます (bỏ ます) + たいです",
+    "explanation": "Bày tỏ mong muốn làm điều gì đó của người nói (Muốn làm gì đó).",
+    "examples": [
+      {
+        "sentence": "日本へ行きたいです。",
+        "reading": "にほんへ いきたいです。",
+        "meaning": "Tôi muốn đi Nhật Bản."
+      },
+      {
+        "sentence": "寿司を食べたいです。",
+        "reading": "すしを たべたいです。",
+        "meaning": "Tôi muốn ăn sushi."
+      }
+    ]
+  },
+  {
+    "id": "g5",
+    "title": "〜たことがあります",
+    "level": "N4",
+    "structure": "Động từ thể た + ことがあります",
+    "explanation": "Dùng để nói về kinh nghiệm, trải nghiệm trong quá khứ (Đã từng làm gì đó).",
+    "examples": [
+      {
+        "sentence": "日本へ行ったことがあります。",
+        "reading": "にほんへ いったことがあります。",
+        "meaning": "Tôi đã từng đi Nhật Bản."
+      },
+      {
+        "sentence": "富士山に登ったことがあります。",
+        "reading": "ふじさんに のぼったことがあります。",
+        "meaning": "Tôi đã từng leo núi Phú Sĩ."
+      }
+    ]
+  },
+  {
+    "id": "g6",
+    "title": "〜なければなりません",
+    "level": "N4",
+    "structure": "Động từ thể ない (bỏ ない) + なければなりません",
+    "explanation": "Biểu thị một hành động bắt buộc phải thực hiện, không thể tránh được (Phải làm gì đó).",
+    "examples": [
+      {
+        "sentence": "毎日宿題をしなければなりません。",
+        "reading": "まいにち しゅくだいを しなければなりません。",
+        "meaning": "Mỗi ngày tôi đều phải làm bài tập về nhà."
+      },
+      {
+        "sentence": "薬を飲まなければなりません。",
+        "reading": "くすりを のまなければなりません。",
+        "meaning": "Tôi phải uống thuốc."
+      }
+    ]
+  },
+  {
+    "id": "g7",
+    "title": "〜ほうがいいです",
+    "level": "N4",
+    "structure": "Động từ thể た / thể ない + ほうがいいです",
+    "explanation": "Dùng để đưa ra lời khuyên hoặc gợi ý cho đối phương nên hoặc không nên làm điều gì đó.",
+    "examples": [
+      {
+        "sentence": "早く寝たほうがいいですよ。",
+        "reading": "はやく ねたほうがいいですよ。",
+        "meaning": "Bạn nên đi ngủ sớm đi nhé."
+      },
+      {
+        "sentence": "煙草は吸わないほうがいいです。",
+        "reading": "たばこは すわないほうがいいです。",
+        "meaning": "Bạn không nên hút thuốc lá."
+      }
+    ]
+  },
+  {
+    "id": "g8",
+    "title": "〜とき",
+    "level": "N4",
+    "structure": "Thể thông thường / Tính từ / Danh từ + の + とき",
+    "explanation": "Liên kết câu chỉ thời điểm diễn ra hành động hoặc trạng thái (Khi, lúc...).",
+    "examples": [
+      {
+        "sentence": "子供のとき、よく川で泳ぎました。",
+        "reading": "こどものとき、よく かわで およぎました。",
+        "meaning": "Khi còn nhỏ, tôi hay bơi ở sông."
+      },
+      {
+        "sentence": "暇なとき, 本を読みます。",
+        "reading": "ひまなとき、ほんを よみます。",
+        "meaning": "Khi rảnh rỗi, tôi sẽ đọc sách."
+      }
+    ]
+  },
+  {
+    "id": "g9",
+    "title": "〜ようにする",
+    "level": "N3",
+    "structure": "Động từ thể từ điển / thể ない + ようにする",
+    "explanation": "Thể hiện sự cố gắng, nỗ lực thực hiện một thói quen hoặc hành động nào đó (Cố gắng làm / không làm gì).",
+    "examples": [
+      {
+        "sentence": "毎日、日本語を勉強するようにしています。",
+        "reading": "まいにち、にほんごを べんきょうするようにしています。",
+        "meaning": "Tôi đang cố gắng học tiếng Nhật mỗi ngày."
+      },
+      {
+        "sentence": "甘いものを食べないようにします。",
+        "reading": "あまいものを たべないようにします。",
+        "meaning": "Tôi sẽ cố gắng không ăn đồ ngọt."
+      }
+    ]
+  },
+  {
+    "id": "g10",
+    "title": "〜かもしれない",
+    "level": "N3",
+    "structure": "Thể thông thường (Danh từ / Tính từ -na bỏ だ) + かもしれない",
+    "explanation": "Biểu thị sự phán đoán hoặc phỏng đoán mang tính không chắc chắn của người nói (Có lẽ, có thể...).",
+    "examples": [
+      {
+        "sentence": "午後は雨が降るかもしれない。",
+        "reading": "ごごは あめが ふるかもしれない。",
+        "meaning": "Chiều nay có lẽ trời sẽ mưa."
+      },
+      {
+        "sentence": "彼は明日忙しいかもしれない。",
+        "reading": "かれは あした いそがしいかもしれない。",
+        "meaning": "Anh ấy ngày mai có lẽ sẽ bận."
+      }
+    ]
+  }
+]

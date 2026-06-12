@@ -1,0 +1,195 @@
+[
+  {
+    "kanji": "日",
+    "strokes": 4,
+    "onyomi": "ニチ, ジツ",
+    "kunyomi": "ひ, -び, -か",
+    "meaning": "Ngày, mặt trời, Nhật Bản",
+    "level": "N5",
+    "examples": [
+      {"word": "日本", "reading": "にほん", "meaning": "Nhật Bản"},
+      {"word": "毎日", "reading": "まいにち", "meaning": "Mỗi ngày"},
+      {"word": "日曜日", "reading": "にちようび", "meaning": "Chủ nhật"}
+    ]
+  },
+  {
+    "kanji": "本",
+    "strokes": 5,
+    "onyomi": "ホン",
+    "kunyomi": "もと",
+    "meaning": "Sách, gốc rễ, nguồn gốc",
+    "level": "N5",
+    "examples": [
+      {"word": "本", "reading": "ほん", "meaning": "Quyển sách"},
+      {"word": "日本語", "reading": "にほんご", "meaning": "Tiếng Nhật"},
+      {"word": "本日", "reading": "ほんじつ", "meaning": "Hôm nay"}
+    ]
+  },
+  {
+    "kanji": "人",
+    "strokes": 2,
+    "onyomi": "ジン, ニン",
+    "kunyomi": "ひと",
+    "meaning": "Người",
+    "level": "N5",
+    "examples": [
+      {"word": "日本人", "reading": "にほんじん", "meaning": "Người Nhật"},
+      {"word": "三人", "reading": "さんにん", "meaning": "Ba người"},
+      {"word": "大人", "reading": "おとな", "meaning": "Người lớn"}
+    ]
+  },
+  {
+    "kanji": "月",
+    "strokes": 4,
+    "onyomi": "ゲツ, ガツ",
+    "kunyomi": "つき",
+    "meaning": "Tháng, mặt trăng",
+    "level": "N5",
+    "examples": [
+      {"word": "一月", "reading": "いちがつ", "meaning": "Tháng Một"},
+      {"word": "今月", "reading": "こんげつ", "meaning": "Tháng này"},
+      {"word": "月曜日", "reading": "げつようび", "meaning": "Thứ Hai"}
+    ]
+  },
+  {
+    "kanji": "火",
+    "strokes": 4,
+    "onyomi": "カ",
+    "kunyomi": "ひ, -び, ほ",
+    "meaning": "Lửa",
+    "level": "N5",
+    "examples": [
+      {"word": "火山", "reading": "かざん", "meaning": "Núi lửa"},
+      {"word": "火曜日", "reading": "かようび", "meaning": "Thứ Ba"},
+      {"word": "火事", "reading": "かじ", "meaning": "Hỏa hoạn"}
+    ]
+  },
+  {
+    "kanji": "水",
+    "strokes": 4,
+    "onyomi": "スイ",
+    "kunyomi": "mizu",
+    "meaning": "Nước",
+    "level": "N5",
+    "examples": [
+      {"word": "水曜日", "reading": "すいようび", "meaning": "Thứ Tư"},
+      {"word": "水道", "reading": "すいどう", "meaning": "Nước máy"},
+      {"word": "香水", "reading": "こうすい", "meaning": "Nước hoa"}
+    ]
+  },
+  {
+    "kanji": "木",
+    "strokes": 4,
+    "onyomi": "モク, ボク",
+    "kunyomi": "き, こ-",
+    "meaning": "Cây, gỗ",
+    "level": "N5",
+    "examples": [
+      {"word": "木曜日", "reading": "もくようび", "meaning": "Thứ Năm"},
+      {"word": "木造", "reading": "もくぞう", "meaning": "Nhà gỗ"},
+      {"word": "大木", "reading": "たいぼく", "meaning": "Cây cổ thụ"}
+    ]
+  },
+  {
+    "kanji": "金",
+    "strokes": 8,
+    "onyomi": "キン, コン",
+    "kunyomi": "かね, かな-",
+    "meaning": "Vàng, tiền bạc, kim loại",
+    "level": "N5",
+    "examples": [
+      {"word": "お金", "reading": "おかね", "meaning": "Tiền bạc"},
+      {"word": "金曜日", "reading": "きんようび", "meaning": "Thứ Sáu"},
+      {"word": "金物", "reading": "かなもの", "meaning": "Đồ kim khí"}
+    ]
+  },
+  {
+    "kanji": "土",
+    "strokes": 3,
+    "onyomi": "ド, ト",
+    "kunyomi": "つち",
+    "meaning": "Đất, thổ nhưỡng",
+    "level": "N5",
+    "examples": [
+      {"word": "土曜日", "reading": "どようび", "meaning": "Thứ Bảy"},
+      {"word": "土地", "reading": "とち", "meaning": "Đất đai"},
+      {"word": "粘土", "reading": "ねんど", "meaning": "Đất sét"}
+    ]
+  },
+  {
+    "kanji": "国",
+    "strokes": 8,
+    "onyomi": "コク",
+    "kunyomi": "くに",
+    "meaning": "Quốc gia, đất nước",
+    "level": "N4",
+    "examples": [
+      {"word": "外国人", "reading": "がいこくじん", "meaning": "Người nước ngoài"},
+      {"word": "国内", "reading": "こくない", "meaning": "Trong nước"},
+      {"word": "中国", "reading": "ちゅうごく", "meaning": "Trung Quốc"}
+    ]
+  },
+  {
+    "kanji": "会",
+    "strokes": 6,
+    "onyomi": "カイ, エ",
+    "kunyomi": "あ.う",
+    "meaning": "Hội họp, gặp gỡ",
+    "level": "N4",
+    "examples": [
+      {"word": "会社", "reading": "かいしゃ", "meaning": "Công ty"},
+      {"word": "会話", "reading": "かいわ", "meaning": "Hội thoại"},
+      {"word": "会う", "reading": "あう", "meaning": "Gặp gỡ"}
+    ]
+  },
+  {
+    "kanji": "社",
+    "strokes": 7,
+    "onyomi": "シャ",
+    "kunyomi": "やしろ",
+    "meaning": "Đền thờ, công ty, xã hội",
+    "level": "N4",
+    "examples": [
+      {"word": "社会", "reading": "しゃかい", "meaning": "Xã hội"},
+      {"word": "神社", "reading": "じんじゃ", "meaning": "Đền thờ Thần đạo"},
+      {"word": "社長", "reading": "しゃちょう", "meaning": "Giám đốc công ty"}
+    ]
+  },
+  {
+    "kanji": "電",
+    "strokes": 13,
+    "onyomi": "デン",
+    "meaning": "Điện, điện tử",
+    "level": "N4",
+    "examples": [
+      {"word": "電車", "reading": "でんしゃ", "meaning": "Tàu điện"},
+      {"word": "電話", "reading": "でんわ", "meaning": "Điện thoại"},
+      {"word": "電気", "reading": "でんき", "meaning": "Điện, ánh sáng"}
+    ]
+  },
+  {
+    "kanji": "旅",
+    "strokes": 10,
+    "onyomi": "リョ",
+    "kunyomi": "たび",
+    "meaning": "Du lịch, chuyến đi",
+    "level": "N3",
+    "examples": [
+      {"word": "旅行", "reading": "りょこう", "meaning": "Du lịch"},
+      {"word": "一人旅", "reading": "ひとりたび", "meaning": "Du lịch một mình"},
+      {"word": "旅人", "reading": "たびびと", "meaning": "Lữ khách"}
+    ]
+  },
+  {
+    "kanji": "意",
+    "strokes": 13,
+    "onyomi": "イ",
+    "meaning": "Ý muốn, ý nghĩa, tâm trí",
+    "level": "N3",
+    "examples": [
+      {"word": "意見", "reading": "いけん", "meaning": "Ý kiến"},
+      {"word": "意味", "reading": "いみ", "meaning": "Ý nghĩa"},
+      {"word": "注意", "reading": "ちゅうい", "meaning": "Chú ý, cẩn thận"}
+    ]
+  }
+]

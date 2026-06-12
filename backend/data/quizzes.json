@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q1",
+    "question": "Nghĩa của động từ 「食べる」 (taberu) là gì?",
+    "options": ["Uống", "Ăn", "Nói", "Đi"],
+    "correct": 1,
+    "explanation": "「食べる」 (taberu) nghĩa là 'Ăn'. Ví dụ: ご飯を食べる (Ăn cơm).",
+    "category": "Từ vựng",
+    "level": "N5"
+  },
+  {
+    "id": "q2",
+    "question": "Chọn trợ từ thích hợp: 「私は学生＿＿です。」",
+    "options": ["が", "を", "は", "に"],
+    "correct": 2,
+    "explanation": "Trợ từ 「は」 (đọc là 'wa') được dùng để chỉ chủ thể của câu. Cấu trúc: A は B です (A là B).",
+    "category": "Ngữ pháp",
+    "level": "N5"
+  },
+  {
+    "id": "q3",
+    "question": "Chữ Kanji 「本」 có âm đọc Onyomi là gì?",
+    "options": ["ホン (Hon)", "じん (Jin)", "くに (Kuni)", "たび (Tabi)"],
+    "correct": 0,
+    "explanation": "Chữ 「本」 (Bản - nghĩa là sách, nguồn gốc) có âm đọc Onyomi thường gặp là ホン (Hon).",
+    "category": "Kanji",
+    "level": "N5"
+  },
+  {
+    "id": "q4",
+    "question": "Câu chào 「おはようございます」 (Ohayou gozaimasu) dùng vào thời điểm nào?",
+    "options": ["Buổi tối trước khi ngủ", "Buổi chiều gặp khách", "Buổi sáng sớm khi gặp nhau", "Khi chia tay ra về"],
+    "correct": 2,
+    "explanation": "「おはようございます」 là lời chào lịch sự dùng vào buổi sáng (Chào buổi sáng).",
+    "category": "Từ vựng",
+    "level": "N5"
+  },
+  {
+    "id": "q5",
+    "question": "Chọn cấu trúc diễn tả mong muốn: 「私は日本へ行き＿＿＿。」",
+    "options": ["たいです", "てください", "ています", "たことがあります"],
+    "correct": 0,
+    "explanation": "Cấu trúc 「V-たいです」 dùng để diễn tả ý muốn làm gì đó của người nói (Tôi muốn đi Nhật Bản).",
+    "category": "Ngữ pháp",
+    "level": "N5"
+  },
+  {
+    "id": "q6",
+    "question": "Chuyển câu sau sang mẫu câu yêu cầu lịch sự: 「ここに名前を書く」",
+    "options": [
+      "ここに名前を書いてください",
+      "ここに名前を書いたことがあります",
+      "ここに名前を書くようにします",
+      "ここに名前を書きたいです"
+    ],
+    "correct": 0,
+    "explanation": "Cấu trúc 「〜てください」 biểu thị lời yêu cầu lịch sự. Động từ 「書く」 nhóm 1 chuyển sang thể て là 「書いて」.",
+    "category": "Ngữ pháp",
+    "level": "N4"
+  },
+  {
+    "id": "q7",
+    "question": "Chọn từ thích hợp: 「私は一度も寿司を＿＿＿＿ことがあります。」",
+    "options": ["食べる", "食べた", "食べて", "食べない"],
+    "correct": 1,
+    "explanation": "Cấu trúc chỉ kinh nghiệm đã từng làm gì: 「V thể た + ことがあります」. Động từ 「食べる」 thể た là 「食べた」.",
+    "category": "Ngữ pháp",
+    "level": "N4"
+  },
+  {
+    "id": "q8",
+    "question": "Chọn trợ từ chỉ phương tiện thích hợp: 「毎日自転車＿＿駅まで行きます。」",
+    "options": ["が", "で", "に", "を"],
+    "correct": 1,
+    "explanation": "Trợ từ 「で」 đứng sau danh từ chỉ phương tiện, công cụ để chỉ cách thức thực hiện hành động (đi bằng xe đạp).",
+    "category": "Ngữ pháp",
+    "level": "N4"
+  },
+  {
+    "id": "q9",
+    "question": "Từ trái nghĩa với từ 「簡単」 (kantan - đơn giản) là từ nào?",
+    "options": ["準備する", "経済", "快適", "複雑"],
+    "correct": 3,
+    "explanation": "「簡単」 có nghĩa là đơn giản, dễ dàng. Trái nghĩa của nó là 「複雑」 (fukuzatsu - phức tạp).",
+    "category": "Từ vựng",
+    "level": "N4"
+  },
+  {
+    "id": "q10",
+    "question": "Chọn cấu trúc đưa ra lời khuyên phù hợp: 「風邪ですか。早く寝た＿＿＿＿いいですよ。」",
+    "options": ["ほうが", "ように", "ながら", "ときに"],
+    "correct": 0,
+    "explanation": "Cấu trúc 「V-た / V-ない + ほうがいいです」 dùng để khuyên ai đó nên hay không nên làm gì (Bạn nên đi ngủ sớm đi).",
+    "category": "Ngữ pháp",
+    "level": "N4"
+  },
+  {
+    "id": "q11",
+    "question": "Từ 「準備する」 (junbi suru) nghĩa là gì?",
+    "options": ["Luyện tập", "Bắt đầu", "Kết thúc", "Chuẩn bị"],
+    "correct": 3,
+    "explanation": "「準備する」 có nghĩa là chuẩn bị hành trang, kế hoạch hoặc đồ đạc cho một sự kiện nào đó.",
+    "category": "Từ vựng",
+    "level": "N3"
+  },
+  {
+    "id": "q12",
+    "question": "Chữ Kanji 「旅」 (Lữ) có ý nghĩa chính là gì?",
+    "options": ["Hội họp", "Đất nước", "Chuyến đi, du lịch", "Kinh tế"],
+    "correct": 2,
+    "explanation": "Chữ 「旅」 (Lữ) nghĩa là chuyến đi, lữ hành, du lịch. Âm đọc Kunyomi là たび (tabi).",
+    "category": "Kanji",
+    "level": "N3"
+  },
+  {
+    "id": "q13",
+    "question": "Chọn cấu trúc biểu thị sự cố gắng tạo thói quen: 「毎日日本語を勉強する＿＿＿＿にしています。」",
+    "options": ["よう", "そう", "ため", "はず"],
+    "correct": 0,
+    "explanation": "Cấu trúc 「V-る / V-ない + ようにする」 thể hiện sự nỗ lực tạo thói quen tốt hoặc duy trì hành động nào đó.",
+    "category": "Ngữ pháp",
+    "level": "N3"
+  },
+  {
+    "id": "q14",
+    "question": "Chọn cấu trúc diễn tả sự phỏng đoán không chắc chắn: 「空が暗いです。午後は雨が降る＿＿＿＿＿＿。」",
+    "options": ["ほうがいいです", "なければなりません", "かもしれない", "たいです"],
+    "correct": 2,
+    "explanation": "Cấu trúc 「Thể thông thường + かもしれない」 diễn tả sự phỏng đoán, có lẽ trời sẽ mưa nhưng không chắc chắn.",
+    "category": "Ngữ pháp",
+    "level": "N3"
+  },
+  {
+    "id": "q15",
+    "question": "Nghĩa của từ 「習慣」 (shuukan) là gì?",
+    "options": ["Liên lạc", "Hứng thú", "Thói quen, tập quán", "Giải quyết"],
+    "correct": 2,
+    "explanation": "「習慣」 nghĩa là thói quen, tập quán làm một việc gì đó lặp đi lặp lại thành nề nếp.",
+    "category": "Từ vựng",
+    "level": "N3"
+  }
+]
