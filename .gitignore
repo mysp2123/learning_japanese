@@ -1,0 +1,8 @@
+# Compiled binaries
+backend/server
+
+# User uploads
+backend/uploads/
+
+# OS files
+.DS_Store

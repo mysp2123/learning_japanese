@@ -27,6 +27,10 @@ func main() {
 	mux.HandleFunc("/api/kanji", server.EnableCORS(server.HandleKanji))
 	mux.HandleFunc("/api/grammar", server.EnableCORS(server.HandleGrammar))
 	mux.HandleFunc("/api/quizzes", server.EnableCORS(server.HandleQuizzes))
+	mux.HandleFunc("/api/chat/messages", server.EnableCORS(server.HandleChatMessages))
+	mux.HandleFunc("/api/chat/stream", server.EnableCORS(server.HandleChatStream))
+	mux.HandleFunc("/api/user/avatar", server.EnableCORS(server.HandleUploadAvatar))
+	mux.HandleFunc("/api/user/avatar/", server.EnableCORS(server.HandleServeAvatar))
 
 	log.Printf("[Khởi động] Go REST API Server đang hoạt động trên cổng %s...", server.Addr)
 	log.Printf("[Hướng dẫn] Bạn có thể kiểm tra dữ liệu bảng chữ cái tại: http://localhost%s/api/alphabet", server.Addr)

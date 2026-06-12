@@ -46,7 +46,7 @@ const KanaGrid = () => {
   return (
     <div>
       <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-        <h1>Bảng chữ cái Tiếng Nhật 🌸</h1>
+        <h1>Bảng chữ cái Tiếng Nhật</h1>
         <p style={{ maxWidth: '600px', margin: '0.5rem auto 0 auto' }}>
           Làm quen với Hiragana và Katakana. Hãy chọn bảng chữ cái bạn muốn học và nhấp vào từng ô ký tự để nghe âm thanh phát âm chuẩn.
         </p>
@@ -67,7 +67,7 @@ const KanaGrid = () => {
         </button>
       </div>
 
-      <div className="kana-grid" style={{ maxWidth: '900px' }}>
+      <div className="kana-grid">
         {rows.map((row, rowIndex) => (
           <React.Fragment key={rowIndex}>
             {row.hiragana.map((hVal, colIndex) => {
