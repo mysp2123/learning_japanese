@@ -22,133 +22,40 @@ const RefreshCwIcon = ({ className }) => (
   </svg>
 );
 
-function ChatRoom({ userLevel, profile }) {
-  const [messages, setMessages] = useState([]);
+function ChatRoom({ userLevel, profile, messages = [], connectionStatus = 'connected', sendMessage, fetchMessages, markChatNotificationsAsRead }) {
   const [inputText, setInputText] = useState('');
-  const [connectionStatus, setConnectionStatus] = useState('connecting'); // 'connecting' | 'connected' | 'error'
   const messagesEndRef = useRef(null);
 
   // Default values if profile is not complete
   const username = profile?.username || 'Người học';
   const avatarUrl = profile?.avatar || '';
 
-  // Get chat history on mount
+  // Mark all chat notifications as read when chat room is active
   useEffect(() => {
-    fetchMessages();
-    
-    // Setup SSE connection
-    const eventSource = new EventSource('http://localhost:8080/api/chat/stream');
-    
-    eventSource.onopen = () => {
-      setConnectionStatus('connected');
-    };
-
-    eventSource.onmessage = (event) => {
-      try {
-        const msg = JSON.parse(event.data);
-        if (msg && msg.id) {
-          setMessages((prev) => {
-            // Avoid adding duplicate messages
-            if (prev.some((m) => m.id === msg.id)) {
-              return prev;
-            }
-            return [...prev, msg];
-          });
-        }
-      } catch (err) {
-        console.error("Failed to parse message event data:", err);
-      }
-    };
-
-    eventSource.onerror = (err) => {
-      console.error("EventSource error:", err);
-      setConnectionStatus('error');
-    };
-
-    // Listen for custom 'connected' event
-    eventSource.addEventListener('connected', () => {
-      setConnectionStatus('connected');
-    });
-
-    return () => {
-      eventSource.close();
-    };
-  }, []);
+    if (markChatNotificationsAsRead) {
+      markChatNotificationsAsRead();
+    }
+  }, [messages, markChatNotificationsAsRead]);
 
   // Scroll to bottom whenever messages list updates
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  const fetchMessages = async () => {
-    try {
-      setConnectionStatus('connecting');
-      const response = await fetch('http://localhost:8080/api/chat/messages');
-      if (response.ok) {
-        const data = await response.json();
-        if (Array.isArray(data)) {
-          setMessages(data);
-        }
-        setConnectionStatus('connected');
-      } else {
-        setConnectionStatus('error');
-      }
-    } catch (err) {
-      console.error("Error loading chat messages:", err);
-      setConnectionStatus('error');
-    }
-  };
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = (e) => {
     e.preventDefault();
     if (!inputText.trim()) return;
-
-    const messageData = {
-      sender: username,
-      avatar: avatarUrl,
-      content: inputText.trim(),
-    };
-
+    sendMessage(inputText.trim());
     setInputText('');
-
-    try {
-      const response = await fetch('http://localhost:8080/api/chat/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(messageData),
-      });
-
-      if (!response.ok) {
-        console.error("Failed to send message");
-      }
-    } catch (err) {
-      console.error("Error sending message:", err);
-    }
   };
 
   // Quick message triggers
-  const sendQuickMessage = async (phrase) => {
-    const messageData = {
-      sender: username,
-      avatar: avatarUrl,
-      content: phrase,
-    };
-
-    try {
-      await fetch('http://localhost:8080/api/chat/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(messageData),
-      });
-    } catch (err) {
-      console.error("Error sending quick message:", err);
-    }
+  const sendQuickMessage = (phrase) => {
+    sendMessage(phrase);
   };
 
   // Format timestamps

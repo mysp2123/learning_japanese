@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 import KanaGrid from './components/KanaGrid';
@@ -12,6 +12,8 @@ import UserSettings from './components/UserSettings';
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   
   // Global student level state: N5, N4, N3
   const [userLevel, setUserLevel] = useState(() => {
@@ -31,6 +33,207 @@ function App() {
     return saved ? JSON.parse(saved) : { username: 'Người học', avatar: '' };
   });
 
+  // Notifications state
+  const [notifications, setNotifications] = useState(() => {
+    const saved = localStorage.getItem('nihongohub_notifications');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    const initial = [
+      {
+        id: 'system_welcome',
+        type: 'system',
+        title: 'Chào mừng đến với NihongoHub!',
+        message: 'Hãy bắt đầu lộ trình tự học tiếng Nhật hiệu quả cùng chúng tôi.',
+        timestamp: new Date().toISOString(),
+        read: false
+      },
+      {
+        id: 'system_tip',
+        type: 'system',
+        title: 'Mẹo tự học',
+        message: 'Tải và in giáo trình trong mục Tài liệu học tập để học hiệu quả hơn.',
+        timestamp: new Date(Date.now() - 3600000).toISOString(),
+        read: false
+      }
+    ];
+    localStorage.setItem('nihongohub_notifications', JSON.stringify(initial));
+    return initial;
+  });
+
+  // Toasts state
+  const [toasts, setToasts] = useState([]);
+
+  // Chat messages state
+  const [messages, setMessages] = useState([]);
+  const [connectionStatus, setConnectionStatus] = useState('connecting');
+
+  // Refs to avoid EventSource re-creation on navigation
+  const currentPathRef = useRef(currentPath);
+  useEffect(() => {
+    currentPathRef.current = currentPath;
+  }, [currentPath]);
+
+  const profileRef = useRef(profile);
+  useEffect(() => {
+    profileRef.current = profile;
+  }, [profile]);
+
+  const addNotification = (notif) => {
+    setNotifications((prev) => {
+      const updated = [notif, ...prev].slice(0, 50);
+      localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const addToast = (toast) => {
+    setToasts((prev) => [...prev, toast]);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== toast.id));
+    }, 4000);
+  };
+
+  const removeToast = (id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const markAsRead = (id) => {
+    setNotifications((prev) => {
+      const updated = prev.map((n) => (n.id === id ? { ...n, read: true } : n));
+      localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const markAllAsRead = () => {
+    setNotifications((prev) => {
+      const updated = prev.map((n) => ({ ...n, read: true }));
+      localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const markChatNotificationsAsRead = () => {
+    setNotifications((prev) => {
+      const updated = prev.map((n) => n.type === 'chat' ? { ...n, read: true } : n);
+      localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const fetchMessages = async () => {
+    try {
+      setConnectionStatus('connecting');
+      const response = await fetch('http://localhost:8080/api/chat/messages');
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setMessages(data);
+        }
+        setConnectionStatus('connected');
+      } else {
+        setConnectionStatus('error');
+      }
+    } catch (err) {
+      console.error("Error loading chat messages:", err);
+      setConnectionStatus('error');
+    }
+  };
+
+  const sendMessage = async (content) => {
+    const messageData = {
+      sender: profile?.username || 'Người học',
+      avatar: profile?.avatar || '',
+      content: content.trim(),
+    };
+
+    try {
+      const response = await fetch('http://localhost:8080/api/chat/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(messageData),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to send message");
+      }
+    } catch (err) {
+      console.error("Error sending message:", err);
+    }
+  };
+
+  // SSE setup
+  useEffect(() => {
+    fetchMessages();
+
+    const eventSource = new EventSource('http://localhost:8080/api/chat/stream');
+    
+    eventSource.onopen = () => {
+      setConnectionStatus('connected');
+    };
+
+    eventSource.onmessage = (event) => {
+      try {
+        const msg = JSON.parse(event.data);
+        if (msg && msg.id) {
+          setMessages((prev) => {
+            if (prev.some((m) => m.id === msg.id)) {
+              return prev;
+            }
+            return [...prev, msg];
+          });
+
+          const currentProfile = profileRef.current;
+          const isSelf = msg.sender === currentProfile?.username;
+          
+          if (!isSelf && currentPathRef.current !== '/chat') {
+            const newNotif = {
+              id: `chat_${msg.id}_${Date.now()}`,
+              type: 'chat',
+              title: `Tin nhắn từ ${msg.sender}`,
+              message: msg.content,
+              timestamp: msg.timestamp || new Date().toISOString(),
+              read: false,
+              url: '/chat'
+            };
+            
+            setNotifications((prev) => {
+              const updated = [newNotif, ...prev].slice(0, 50);
+              localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
+              return updated;
+            });
+
+            addToast({
+              id: Date.now() + Math.random(),
+              title: msg.sender,
+              content: msg.content,
+              avatar: msg.avatar
+            });
+          }
+        }
+      } catch (err) {
+        console.error("Failed to parse message event:", err);
+      }
+    };
+
+    eventSource.onerror = () => {
+      setConnectionStatus('error');
+    };
+
+    eventSource.addEventListener('connected', () => {
+      setConnectionStatus('connected');
+    });
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
   const handleProfileUpdate = (updatedProfile) => {
     const newProfile = { ...updatedProfile, level: userLevel };
     setProfile(newProfile);
@@ -42,6 +245,17 @@ function App() {
     const newProfile = { ...profile, level: newLevel };
     setProfile(newProfile);
     localStorage.setItem('nihongohub_profile', JSON.stringify(newProfile));
+
+    // Add level change system notification
+    const newNotif = {
+      id: `system_level_${Date.now()}`,
+      type: 'system',
+      title: 'Cập nhật trình độ học',
+      message: `Chúc mừng! Bạn đã đổi trình độ học tập sang ${newLevel}. Hãy khám phá lộ trình học tập phù hợp!`,
+      timestamp: new Date().toISOString(),
+      read: false
+    };
+    addNotification(newNotif);
   };
 
   // Render a personalized learning path based on selected level
@@ -215,6 +429,9 @@ function App() {
           userLevel={userLevel} 
           setUserLevel={handleLevelChange} 
           profile={profile} 
+          notifications={notifications}
+          markAsRead={markAsRead}
+          markAllAsRead={markAllAsRead}
         />
 
         {/* Nội dung trang thay đổi theo Router */}
@@ -226,7 +443,17 @@ function App() {
             <Route path="/grammar" element={<GrammarList userLevel={userLevel} />} />
             <Route path="/quizzes" element={<QuizRunner userLevel={userLevel} />} />
             <Route path="/documents" element={<DocumentList />} />
-            <Route path="/chat" element={<ChatRoom userLevel={userLevel} profile={profile} />} />
+            <Route path="/chat" element={
+              <ChatRoom 
+                userLevel={userLevel} 
+                profile={profile} 
+                messages={messages}
+                connectionStatus={connectionStatus}
+                sendMessage={sendMessage}
+                fetchMessages={fetchMessages}
+                markChatNotificationsAsRead={markChatNotificationsAsRead}
+              />
+            } />
             <Route path="/settings" element={
               <UserSettings 
                 userLevel={userLevel} 
@@ -237,6 +464,39 @@ function App() {
             } />
           </Routes>
         </main>
+      </div>
+
+      {/* Floating Toast Notification Popup */}
+      <div className="toast-container">
+        {toasts.map((toast) => (
+          <div key={toast.id} className="toast-item" onClick={() => { navigate('/chat'); removeToast(toast.id); }}>
+            <div className="toast-avatar-container">
+              {toast.avatar ? (
+                <img src={toast.avatar} alt={toast.title} className="toast-avatar-img" />
+              ) : (
+                <div className="toast-avatar-fallback">
+                  {toast.title.substring(0, 1).toUpperCase()}
+                </div>
+              )}
+            </div>
+            <div className="toast-body">
+              <span className="toast-header-text">{toast.title}</span>
+              <span className="toast-message">{toast.content}</span>
+            </div>
+            <button 
+              className="toast-close-btn" 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                removeToast(toast.id); 
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
