@@ -188,9 +188,8 @@ function App() {
       {/* Header & Navigation (Loại bỏ hoàn toàn icon SVG) */}
       <header className="header">
         <div className="container nav-wrapper">
-          <div className="logo" onClick={() => setActiveTab('home')}>
-            <span className="logo-ja">日本語</span>
-            <span>NihongoHub</span>
+          <div className="logo" onClick={() => setActiveTab('home')} style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="/logo.png" alt="NihongoHub" style={{ height: '3.2rem', width: 'auto', objectFit: 'contain' }} />
           </div>
           
           <nav style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
@@ -237,18 +236,20 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container footer-content">
-          <div className="footer-logo">
-            <span
-              className="logo-ja"
-              style={{
-                backgroundColor: 'transparent',
-                border: '1px solid var(--text-light)',
-                padding: '0.1rem 0.4rem',
-              }}
-            >
-              日本語
-            </span>
-            <span>NihongoHub</span>
+          <div className="footer-logo" onClick={() => setActiveTab('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '1.8rem',
+              height: '1.8rem',
+              borderRadius: '50%',
+              backgroundColor: 'var(--accent)',
+              color: '#ffffff',
+              fontWeight: '800',
+              fontSize: '0.9rem'
+            }}>N</span>
+            <span style={{ fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-light)' }}>NihongoHub</span>
           </div>
           <div className="footer-credits">
             &copy; 2026 NihongoHub. Lộ trình học tiếng Nhật thông minh & tối giản.

@@ -6,21 +6,22 @@
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-light: #f8fafc;
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #eff6ff;
+  --primary: #0f172a; /* Deep slate navy from logo */
+  --primary-hover: #1e293b;
+  --primary-light: #f1f5f9;
   --border-color: #e2e8f0;
-  --success: #16a34a;
-  --success-light: #f0fdf4;
-  --danger: #dc2626;
+  --success: #10b981;
+  --success-light: #ecfdf5;
+  --danger: #ef4444;
   --danger-light: #fef2f2;
-  --accent: #f59e0b;
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --accent: #e11d48; /* Vibrant crimson red from logo sun */
+  --accent-light: #fff1f2;
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-japanese: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-  --border-radius: 12px;
-  --transition-speed: 0.15s;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --border-radius: 10px;
+  --transition-speed: 0.2s;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
 }
 
 /* --- Base Reset --- */
@@ -839,25 +840,38 @@ p {
   .filter-select {
     width: 100%;
   }
+}
 
-
-
-/* --- Cute Hover Bounce Animations --- */
-@keyframes cute-hover-bounce {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.04) translateY(-3px); }
+/* --- Clean Modern Hover Effects --- */
+.kana-cell {
+  transition: transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+              border-color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease,
+              background-color var(--transition-speed) ease;
 }
 
 .kana-cell:hover:not(.empty) {
-  animation: cute-hover-bounce 0.2s ease forwards;
-  border-color: var(--primary);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.12);
+  background-color: var(--accent-light);
 }
 
-.feature-card:hover, .grammar-card:hover {
-  animation: cute-hover-bounce 0.2s ease forwards;
-  box-shadow: var(--shadow-md);
+.feature-card, .grammar-card, .path-step-card, .quiz-card {
+  transition: transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
 }
+
+.feature-card:hover, .grammar-card:hover, .path-step-card:hover, .quiz-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+
+
+
 
 /* Confetti Layer for Quizzes */
 .confetti-canvas {
