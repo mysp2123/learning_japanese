@@ -5,7 +5,7 @@ const GrammarList = ({ userLevel }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/grammar')
+    fetch(`${window.API_BASE}/grammar`)
       .then((res) => res.json())
       .then((data) => {
         setGrammars(data);

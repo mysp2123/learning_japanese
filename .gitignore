@@ -1,5 +1,19 @@
 # Compiled binaries
+*.exe
 backend/server
+backend/test_server
+
+# Node modules
+node_modules/
+**/node_modules/
+backend/data/node_modules/
+frontend/node_modules/
+
+# Production build artifacts
+dist/
+**/dist/
+frontend/dist/
+build/
 
 # User uploads
 backend/uploads/

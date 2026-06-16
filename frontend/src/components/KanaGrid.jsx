@@ -7,7 +7,7 @@ const KanaGrid = () => {
 
   useEffect(() => {
     // Fetch alphabet data from Go API
-    fetch('http://localhost:8080/api/alphabet')
+    fetch(`${window.API_BASE}/alphabet`)
       .then((res) => res.json())
       .then((data) => {
         setRows(data.rows || []);

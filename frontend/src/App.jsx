@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
@@ -9,6 +9,10 @@ import QuizRunner from './components/QuizRunner';
 import DocumentList from './components/DocumentList';
 import ChatRoom from './components/ChatRoom';
 import UserSettings from './components/UserSettings';
+import AuthPage from './components/AuthPage';
+import VideoLearning from './components/VideoLearning';
+import VocabListsPage from './components/VocabListsPage';
+import LearningDashboard from './components/LearningDashboard';
 
 function App() {
   const navigate = useNavigate();
@@ -30,7 +34,11 @@ function App() {
   // Global user profile state: name, avatar
   const [profile, setProfile] = useState(() => {
     const saved = localStorage.getItem('nihongohub_profile');
-    return saved ? JSON.parse(saved) : { username: 'Người học', avatar: '' };
+    try {
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
   });
 
   // Notifications state
@@ -65,21 +73,6 @@ function App() {
 
   // Toasts state
   const [toasts, setToasts] = useState([]);
-
-  // Chat messages state
-  const [messages, setMessages] = useState([]);
-  const [connectionStatus, setConnectionStatus] = useState('connecting');
-
-  // Refs to avoid EventSource re-creation on navigation
-  const currentPathRef = useRef(currentPath);
-  useEffect(() => {
-    currentPathRef.current = currentPath;
-  }, [currentPath]);
-
-  const profileRef = useRef(profile);
-  useEffect(() => {
-    profileRef.current = profile;
-  }, [profile]);
 
   const addNotification = (notif) => {
     setNotifications((prev) => {
@@ -116,135 +109,62 @@ function App() {
     });
   };
 
-  const markChatNotificationsAsRead = () => {
+  const markChatNotificationsAsRead = useCallback(() => {
     setNotifications((prev) => {
+      const hasUnread = prev.some((n) => n.type === 'chat' && !n.read);
+      if (!hasUnread) return prev;
+      
       const updated = prev.map((n) => n.type === 'chat' ? { ...n, read: true } : n);
       localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
       return updated;
     });
-  };
-
-  const fetchMessages = async () => {
-    try {
-      setConnectionStatus('connecting');
-      const response = await fetch('http://localhost:8080/api/chat/messages');
-      if (response.ok) {
-        const data = await response.json();
-        if (Array.isArray(data)) {
-          setMessages(data);
-        }
-        setConnectionStatus('connected');
-      } else {
-        setConnectionStatus('error');
-      }
-    } catch (err) {
-      console.error("Error loading chat messages:", err);
-      setConnectionStatus('error');
-    }
-  };
-
-  const sendMessage = async (content) => {
-    const messageData = {
-      sender: profile?.username || 'Người học',
-      avatar: profile?.avatar || '',
-      content: content.trim(),
-    };
-
-    try {
-      const response = await fetch('http://localhost:8080/api/chat/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(messageData),
-      });
-
-      if (!response.ok) {
-        console.error("Failed to send message");
-      }
-    } catch (err) {
-      console.error("Error sending message:", err);
-    }
-  };
-
-  // SSE setup
-  useEffect(() => {
-    fetchMessages();
-
-    const eventSource = new EventSource('http://localhost:8080/api/chat/stream');
-    
-    eventSource.onopen = () => {
-      setConnectionStatus('connected');
-    };
-
-    eventSource.onmessage = (event) => {
-      try {
-        const msg = JSON.parse(event.data);
-        if (msg && msg.id) {
-          setMessages((prev) => {
-            if (prev.some((m) => m.id === msg.id)) {
-              return prev;
-            }
-            return [...prev, msg];
-          });
-
-          const currentProfile = profileRef.current;
-          const isSelf = msg.sender === currentProfile?.username;
-          
-          if (!isSelf && currentPathRef.current !== '/chat') {
-            const newNotif = {
-              id: `chat_${msg.id}_${Date.now()}`,
-              type: 'chat',
-              title: `Tin nhắn từ ${msg.sender}`,
-              message: msg.content,
-              timestamp: msg.timestamp || new Date().toISOString(),
-              read: false,
-              url: '/chat'
-            };
-            
-            setNotifications((prev) => {
-              const updated = [newNotif, ...prev].slice(0, 50);
-              localStorage.setItem('nihongohub_notifications', JSON.stringify(updated));
-              return updated;
-            });
-
-            addToast({
-              id: Date.now() + Math.random(),
-              title: msg.sender,
-              content: msg.content,
-              avatar: msg.avatar
-            });
-          }
-        }
-      } catch (err) {
-        console.error("Failed to parse message event:", err);
-      }
-    };
-
-    eventSource.onerror = () => {
-      setConnectionStatus('error');
-    };
-
-    eventSource.addEventListener('connected', () => {
-      setConnectionStatus('connected');
-    });
-
-    return () => {
-      eventSource.close();
-    };
   }, []);
 
-  const handleProfileUpdate = (updatedProfile) => {
+  const handleProfileUpdate = async (updatedProfile) => {
     const newProfile = { ...updatedProfile, level: userLevel };
     setProfile(newProfile);
     localStorage.setItem('nihongohub_profile', JSON.stringify(newProfile));
+
+    if (newProfile.rawUsername) {
+      try {
+        await fetch(`${window.API_BASE}/user/profile`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: newProfile.rawUsername,
+            fullName: newProfile.username,
+            avatar: newProfile.avatar,
+            level: newProfile.level
+          })
+        });
+      } catch (err) {
+        console.error("Lỗi cập nhật profile lên PostgreSQL:", err);
+      }
+    }
   };
 
-  const handleLevelChange = (newLevel) => {
+  const handleLevelChange = async (newLevel) => {
     setUserLevel(newLevel);
     const newProfile = { ...profile, level: newLevel };
     setProfile(newProfile);
     localStorage.setItem('nihongohub_profile', JSON.stringify(newProfile));
+
+    if (newProfile && newProfile.rawUsername) {
+      try {
+        await fetch(`${window.API_BASE}/user/profile`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: newProfile.rawUsername,
+            fullName: newProfile.username,
+            avatar: newProfile.avatar,
+            level: newLevel
+          })
+        });
+      } catch (err) {
+        console.error("Lỗi cập nhật level lên PostgreSQL:", err);
+      }
+    }
 
     // Add level change system notification
     const newNotif = {
@@ -417,6 +337,19 @@ function App() {
     }
   };
 
+  if (!profile) {
+    return (
+      <AuthPage 
+        onLoginSuccess={(profileData) => {
+          setProfile(profileData);
+          if (profileData.level) {
+            setUserLevel(profileData.level);
+          }
+        }} 
+      />
+    );
+  }
+
   return (
     <div className="app-layout">
       {/* Sidebar - Cố định bên trái */}
@@ -437,20 +370,18 @@ function App() {
         {/* Nội dung trang thay đổi theo Router */}
         <main className="app-content">
           <Routes>
-            <Route path="/" element={renderLearningPath()} />
+            <Route path="/" element={<LearningDashboard profile={profile} userLevel={userLevel} setUserLevel={handleLevelChange} navigate={navigate} />} />
             <Route path="/alphabet" element={<KanaGrid />} />
-            <Route path="/vocabulary" element={<VocabKanji userLevel={userLevel} />} />
+            <Route path="/vocabulary" element={<VocabKanji userLevel={userLevel} profile={profile} />} />
             <Route path="/grammar" element={<GrammarList userLevel={userLevel} />} />
             <Route path="/quizzes" element={<QuizRunner userLevel={userLevel} />} />
-            <Route path="/documents" element={<DocumentList />} />
+            <Route path="/videos" element={<VideoLearning profile={profile} />} />
+            <Route path="/vocab-lists" element={<VocabListsPage profile={profile} />} />
+            <Route path="/documents" element={<DocumentList profile={profile} />} />
             <Route path="/chat" element={
               <ChatRoom 
                 userLevel={userLevel} 
                 profile={profile} 
-                messages={messages}
-                connectionStatus={connectionStatus}
-                sendMessage={sendMessage}
-                fetchMessages={fetchMessages}
                 markChatNotificationsAsRead={markChatNotificationsAsRead}
               />
             } />

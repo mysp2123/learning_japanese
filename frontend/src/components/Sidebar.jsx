@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Modal from './Modal';
 
 // Linea Basic Icon Set (Minimalist Thin Outlines)
 const LineaHome = () => (
@@ -55,6 +56,13 @@ const LineaMessage = () => (
   </svg>
 );
 
+const LineaVideo = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="23 7 16 12 23 17 23 7" />
+    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+  </svg>
+);
+
 const LineaSett = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="3" />
@@ -71,13 +79,29 @@ function Sidebar() {
     { path: '/vocabulary', name: 'Từ vựng & Kanji', icon: LineaNotebook },
     { path: '/grammar', name: 'Ngữ pháp', icon: LineaGraduation },
     { path: '/quizzes', name: 'Trắc nghiệm', icon: LineaTrophy },
-    { path: '/documents', name: 'Tài liệu', icon: LineaFolder },
+  { path: '/videos', name: 'Học qua Video', icon: LineaVideo },
+  { path: '/vocab-lists', name: 'Danh sách từ vựng', icon: LineaNotebook },
+  { path: '/documents', name: 'Tài liệu', icon: LineaFolder },
     { path: '/chat', name: 'Phòng Chat', icon: LineaMessage },
     { path: '/settings', name: 'Cài đặt', icon: LineaSett },
   ];
 
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleLogoutConfirm = () => {
+    localStorage.removeItem('nihongohub_profile');
+    window.location.reload();
+  };
+
   return (
     <aside className="sidebar">
+      <Modal 
+        isOpen={isLogoutModalOpen}
+        title="Xác nhận đăng xuất"
+        message="Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?"
+        onConfirm={handleLogoutConfirm}
+        onCancel={() => setIsLogoutModalOpen(false)}
+      />
       <div 
         className="sidebar-logo" 
         onClick={() => navigate('/')} 
@@ -120,8 +144,29 @@ function Sidebar() {
         })}
       </nav>
 
-      <div className="sidebar-footer">
-        <div className="version-badge">v2.0 Premium</div>
+      <div className="sidebar-footer" style={{ padding: '1rem' }}>
+        <button 
+          onClick={() => setIsLogoutModalOpen(true)}
+          className="btn btn-secondary" 
+          style={{ 
+            width: '100%', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: '0.5rem',
+            padding: '0.6rem',
+            borderRadius: 'var(--border-radius)',
+            fontSize: '0.9rem',
+            fontWeight: '600',
+            border: '1px solid var(--border-color)',
+            cursor: 'pointer',
+            backgroundColor: '#fee2e2',
+            color: 'var(--danger)',
+            borderColor: '#fca5a5'
+          }}
+        >
+          Đăng xuất
+        </button>
       </div>
     </aside>
   );

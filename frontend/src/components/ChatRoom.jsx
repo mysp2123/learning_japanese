@@ -22,13 +22,119 @@ const RefreshCwIcon = ({ className }) => (
   </svg>
 );
 
-function ChatRoom({ userLevel, profile, messages = [], connectionStatus = 'connected', sendMessage, fetchMessages, markChatNotificationsAsRead }) {
+function ChatRoom({ userLevel, profile, markChatNotificationsAsRead }) {
+  const [messages, setMessages] = useState([]);
+  const [connectionStatus, setConnectionStatus] = useState('connecting');
   const [inputText, setInputText] = useState('');
+  const [usersList, setUsersList] = useState([]);
   const messagesEndRef = useRef(null);
 
   // Default values if profile is not complete
   const username = profile?.username || 'Người học';
   const avatarUrl = profile?.avatar || '';
+
+  const getFallbackBgColor = (name) => {
+    const colors = ['#a855f7', '#10b981', '#f59e0b', '#3b82f6', '#ec4899', '#ef4444'];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % colors.length;
+    return colors[index];
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(`${window.API_BASE}/users`);
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setUsersList(data);
+        }
+      }
+    } catch (err) {
+      console.error("Error loading users:", err);
+    }
+  };
+
+  const fetchMessages = async () => {
+    try {
+      setConnectionStatus('connecting');
+      const response = await fetch(`${window.API_BASE}/chat/messages`);
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setMessages(data);
+        }
+        setConnectionStatus('connected');
+      } else {
+        setConnectionStatus('error');
+      }
+    } catch (err) {
+      console.error("Error loading chat messages:", err);
+      setConnectionStatus('error');
+    }
+  };
+
+  const sendMessage = async (content) => {
+    const messageData = {
+      sender: username,
+      avatar: avatarUrl,
+      content: content.trim(),
+    };
+
+    try {
+      const response = await fetch(`${window.API_BASE}/chat/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(messageData),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to send message");
+      }
+    } catch (err) {
+      console.error("Error sending message:", err);
+    }
+  };
+
+  // SSE setup
+  useEffect(() => {
+    fetchMessages();
+    fetchUsers();
+
+    const eventSource = new EventSource(`${window.API_BASE}/chat/stream`);
+    
+    eventSource.onopen = () => {
+      setConnectionStatus('connected');
+    };
+
+    eventSource.onmessage = (event) => {
+      try {
+        const msg = JSON.parse(event.data);
+        if (msg && msg.id) {
+          setMessages((prev) => {
+            if (prev.some((m) => m.id === msg.id)) {
+              return prev;
+            }
+            return [...prev, msg];
+          });
+        }
+      } catch (err) {
+        console.error("Failed to parse message event:", err);
+      }
+    };
+
+    eventSource.onerror = () => {
+      setConnectionStatus('error');
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   // Mark all chat notifications as read when chat room is active
   useEffect(() => {
@@ -203,7 +309,7 @@ function ChatRoom({ userLevel, profile, messages = [], connectionStatus = 'conne
         {/* Members Sidebar Panel */}
         <div className="chat-members-panel">
           <div className="panel-title">
-            <span>Thành viên</span>
+            <span>Thành viên ({usersList.length || 1})</span>
           </div>
           <div className="members-list">
             <div className="member-item me">
@@ -211,51 +317,42 @@ function ChatRoom({ userLevel, profile, messages = [], connectionStatus = 'conne
                 {avatarUrl ? (
                   <img src={avatarUrl} alt={username} className="member-avatar" />
                 ) : (
-                  <div className="member-avatar-fallback me">
+                  <div className="member-avatar-fallback me" style={{ backgroundColor: getFallbackBgColor(username) }}>
                     {username.substring(0, 1).toUpperCase()}
                   </div>
                 )}
                 <span className="status-badge online"></span>
               </div>
               <div className="member-detail">
-                <span className="member-name">{username} (Bạn)</span>
+                <span className="member-name">{profile?.full_name || username} (Bạn)</span>
                 <span className="member-status">Trình độ {userLevel}</span>
               </div>
             </div>
 
-            {/* Simulated active users to make the chat room feel lively */}
-            <div className="member-item">
-              <div className="member-avatar-wrapper">
-                <div className="member-avatar-fallback" style={{ backgroundColor: '#a855f7' }}>A</div>
-                <span className="status-badge online"></span>
-              </div>
-              <div className="member-detail">
-                <span className="member-name">Anh Nguyễn</span>
-                <span className="member-status">Trình độ N3</span>
-              </div>
-            </div>
-
-            <div className="member-item">
-              <div className="member-avatar-wrapper">
-                <div className="member-avatar-fallback" style={{ backgroundColor: '#10b981' }}>M</div>
-                <span className="status-badge online"></span>
-              </div>
-              <div className="member-detail">
-                <span className="member-name">Minh Hoàng</span>
-                <span className="member-status">Trình độ N4</span>
-              </div>
-            </div>
-
-            <div className="member-item">
-              <div className="member-avatar-wrapper">
-                <div className="member-avatar-fallback" style={{ backgroundColor: '#f59e0b' }}>Y</div>
-                <span className="status-badge online"></span>
-              </div>
-              <div className="member-detail">
-                <span className="member-name">Yuki Chan</span>
-                <span className="member-status">Người bản xứ 🎌</span>
-              </div>
-            </div>
+            {/* Real users fetched from database */}
+            {usersList
+              .filter((u) => u.username !== profile?.username)
+              .map((u) => {
+                const displayName = u.full_name || u.username;
+                return (
+                  <div key={u.id} className="member-item">
+                    <div className="member-avatar-wrapper">
+                      {u.avatar ? (
+                        <img src={u.avatar} alt={displayName} className="member-avatar" />
+                      ) : (
+                        <div className="member-avatar-fallback" style={{ backgroundColor: getFallbackBgColor(displayName) }}>
+                          {displayName.substring(0, 1).toUpperCase()}
+                        </div>
+                      )}
+                      <span className="status-badge online"></span>
+                    </div>
+                    <div className="member-detail">
+                      <span className="member-name">{displayName}</span>
+                      <span className="member-status">Trình độ {u.level || 'N5'}</span>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Modal from './Modal';
 
 // Custom inline SVG icons
 const UserIcon = ({ size = 24 }) => (
@@ -52,6 +53,35 @@ function UserSettings({ userLevel, setUserLevel, profile, onProfileUpdate }) {
   const [saveSuccess, setSaveSuccess] = useState(false);
   const fileInputRef = useRef(null);
 
+  // Custom Modal State
+  const [modalConfig, setModalConfig] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    type: 'alert',
+    onConfirm: null
+  });
+
+  const showAlert = (title, message) => {
+    setModalConfig({
+      isOpen: true,
+      title,
+      message,
+      type: 'alert',
+      onConfirm: null
+    });
+  };
+
+  const showConfirm = (title, message, onConfirm) => {
+    setModalConfig({
+      isOpen: true,
+      title,
+      message,
+      type: 'confirm',
+      onConfirm
+    });
+  };
+
   const handleAvatarClick = () => {
     fileInputRef.current?.click();
   };
@@ -62,7 +92,7 @@ function UserSettings({ userLevel, setUserLevel, profile, onProfileUpdate }) {
 
     // Validate size (5MB max)
     if (file.size > 5 * 1024 * 1024) {
-      alert("Kích thước ảnh quá lớn. Vui lòng chọn ảnh dưới 5MB.");
+      showAlert("Lỗi tệp tin", "Kích thước ảnh quá lớn. Vui lòng chọn ảnh dưới 5MB.");
       return;
     }
 
@@ -71,7 +101,7 @@ function UserSettings({ userLevel, setUserLevel, profile, onProfileUpdate }) {
 
     try {
       setUploading(true);
-      const response = await fetch('http://localhost:8080/api/user/avatar', {
+      const response = await fetch(`${window.API_BASE}/user/avatar`, {
         method: 'POST',
         body: formData,
       });
@@ -86,11 +116,11 @@ function UserSettings({ userLevel, setUserLevel, profile, onProfileUpdate }) {
         }
       } else {
         const errData = await response.json();
-        alert(errData.error || "Có lỗi xảy ra khi upload ảnh.");
+        showAlert("Lỗi tải lên", errData.error || "Có lỗi xảy ra khi upload ảnh.");
       }
     } catch (err) {
       console.error("Upload error:", err);
-      alert("Không thể kết nối đến máy chủ để upload ảnh.");
+      showAlert("Lỗi kết nối", "Không thể kết nối đến máy chủ để upload ảnh.");
     } finally {
       setUploading(false);
     }
@@ -110,13 +140,17 @@ function UserSettings({ userLevel, setUserLevel, profile, onProfileUpdate }) {
   };
 
   const handleResetProfile = () => {
-    if (window.confirm("Bạn có chắc chắn muốn khôi phục hồ sơ mặc định không?")) {
-      setUsername('Người học');
-      setAvatar('');
-      setUserLevel('N5');
-      const updated = { username: 'Người học', avatar: '' };
-      onProfileUpdate(updated);
-    }
+    showConfirm(
+      "Xác nhận đặt lại", 
+      "Bạn có chắc chắn muốn khôi phục hồ sơ mặc định không?", 
+      () => {
+        setUsername('Người học');
+        setAvatar('');
+        setUserLevel('N5');
+        const updated = { username: 'Người học', avatar: '' };
+        onProfileUpdate(updated);
+      }
+    );
   };
 
   return (
@@ -248,6 +282,17 @@ function UserSettings({ userLevel, setUserLevel, profile, onProfileUpdate }) {
           </div>
         </div>
       </div>
+      <Modal 
+        isOpen={modalConfig.isOpen}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        type={modalConfig.type}
+        onConfirm={() => {
+          if (modalConfig.onConfirm) modalConfig.onConfirm();
+          setModalConfig(prev => ({ ...prev, isOpen: false }));
+        }}
+        onCancel={() => setModalConfig(prev => ({ ...prev, isOpen: false }))}
+      />
     </div>
   );
 }
