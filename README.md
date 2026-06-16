@@ -10,6 +10,7 @@ NihongoHub là một ứng dụng Full-Stack hiện đại hỗ trợ tự học
 * **Thống kê thời gian thực (Premium Stats Grid)**: Theo dõi chuỗi học tập (Streak), số câu hỏi đã luyện tập hôm nay, tỷ lệ trả lời chính xác (%) và tổng số từ vựng đã thuộc.
 * **Gợi ý từ vựng hàng ngày**: Đề xuất ngẫu nhiên 3 từ vựng phù hợp với trình độ hiện tại của người dùng (N5, N4, N3...).
 * **Bảng viết Kanji ảo (Writing Pad)**: Luyện viết chữ Kanji nét vẽ chuẩn xác ngay trên trình duyệt.
+<img width="1694" height="859" alt="image" src="https://github.com/user-attachments/assets/77d566f3-e8f9-4920-bd15-bc7eaa84415a" />
 
 ### 2. Các Chế Độ Học & Kiểm Tra Đa Dạng
 * **Bảng chữ cái tương tác (Kana Grid)**: Học Hiragana và Katakana kèm audio phát âm bản xứ.
@@ -18,14 +19,20 @@ NihongoHub là một ứng dụng Full-Stack hiện đại hỗ trợ tự học
   * Luyện nghe phản xạ (Listening Quiz).
   * Chạy đua thời gian (Time Attack).
   * Flashcard tự động (Auto-playing Flashcards).
+<img width="796" height="840" alt="image" src="https://github.com/user-attachments/assets/7cf7b668-8cc6-4446-a86a-ad8e5343060a" />
+
 
 ### 3. Thư Viện Tài Liệu Cộng Đồng (Community Library)
 * Hỗ trợ tải lên và chia sẻ các tệp tài liệu tự học (`.pdf`, `.docx`, `.xlsx`...) hoặc đính kèm liên kết ngoài (Google Drive).
 * Tìm kiếm và phân loại tài liệu theo trình độ (N5, N4, N3, General).
+<img width="1491" height="515" alt="image" src="https://github.com/user-attachments/assets/f34bec5d-2ee4-44ac-9209-1c327ac05d88" />
+<img width="402" height="566" alt="image" src="https://github.com/user-attachments/assets/dba87f1c-c2da-41f9-9ff9-3ad0b0d1b12a" />
+
 
 ### 4. Học Qua Video & Chat Bot AI
 * Xem các bài giảng ngữ pháp/từ vựng trực quan và thảo luận dưới phần bình luận.
 * Phòng Chat mô phỏng hội thoại tiếng Nhật cùng trợ lý học tập AI.
+<img width="1691" height="860" alt="image" src="https://github.com/user-attachments/assets/fb5e8137-df10-4fd4-b7e7-688fdf648b7f" />
 
 ---
 
