@@ -1,10 +1,10 @@
-# NihongoHub — Nền Tảng Học Tiếng Nhật Toàn Diện 🚀
+# NihongoHub — Nền Tảng Học Tiếng Nhật Toàn Diện
 
 NihongoHub là một ứng dụng Full-Stack hiện đại hỗ trợ tự học tiếng Nhật từ cơ bản đến nâng cao. Nền tảng kết hợp các công cụ học tập tương tác trực quan, theo dõi tiến độ cá nhân hóa và thư viện chia sẻ tài liệu từ cộng đồng học viên.
 
 ---
 
-## 🌟 Tính Năng Nổi Bật
+## Tính Năng Nổi Bật
 
 ### 1. Bảng Điều Khiển Học Tập (Dashboard)
 * **Thống kê thời gian thực (Premium Stats Grid)**: Theo dõi chuỗi học tập (Streak), số câu hỏi đã luyện tập hôm nay, tỷ lệ trả lời chính xác (%) và tổng số từ vựng đã thuộc.
@@ -36,7 +36,7 @@ NihongoHub là một ứng dụng Full-Stack hiện đại hỗ trợ tự học
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng
+## Công Nghệ Sử Dụng
 
 ### Frontend
 * **Core**: React.js (Vite)
@@ -53,7 +53,7 @@ NihongoHub là một ứng dụng Full-Stack hiện đại hỗ trợ tự học
 
 ---
 
-## 📁 Cấu Trúc Thư Mục Dự Án
+## Cấu Trúc Thư Mục Dự Án
 
 ```text
 ├── backend/
@@ -73,7 +73,7 @@ NihongoHub là một ứng dụng Full-Stack hiện đại hỗ trợ tự học
 
 ---
 
-## ⚙️ Hướng Dẫn Cài Đặt & Chạy Dưới Local
+## Hướng Dẫn Cài Đặt & Chạy Dưới Local
 
 ### 1. Chuẩn Bị Cơ Sở Dữ Liệu (PostgreSQL)
 Tạo một cơ sở dữ liệu PostgreSQL trên máy của bạn và chạy mã nguồn cấu hình schema (được lưu tại `backend/api/db.go`). Hệ thống tự động nhận dạng kết nối thông qua các biến môi trường sau:
@@ -131,6 +131,6 @@ server {
 
 ---
 
-## 🚀 Đóng Góp & Phát Triển
+## Đóng Góp & Phát Triển
 1. Mọi tính năng mới nên được phát triển trên nhánh `dev`.
 2. Sau khi kiểm thử cục bộ hoàn tất, tiến hành gộp (merge) nhánh `dev` vào nhánh chính `main` trước khi đẩy (push) lên máy chủ Git Production.
